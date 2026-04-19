@@ -1,0 +1,343 @@
+{
+  "info": {
+    "_postman_id": "bdd4f334-0533-4a17-be06-3c728c1aa41d",
+    "name": "ReqRes- Sample- test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33310473",
+    "_collection_link": "https://go.postman.co/collection/33310473-bdd4f334-0533-4a17-be06-3c728c1aa41d?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GET Records",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"status code of 200\", ()=>{\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"Response time should be less 200ms\",()=>{\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+              "})\r",
+              "let res= pm.response.json();\r",
+              "\r",
+              "pm.test(\"Response has Data\",()=>{\r",
+              "    pm.expect(res).to.have.property(\"data\");\r",
+              " });\r",
+              "\r",
+              "pm.test(\"Name is Present\" ,()=>{\r",
+              "    pm.expect(res.data[0].data).to.have.property(\"name\");\r",
+              " });\r",
+              "\r",
+              "pm.test(\"name should be null\",()=>{\r",
+              "    pm.expect(res.data.name).to.not.be.null;\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "pro_15dd380b55638cfddc9baeebbafe3b28745da9833a30d5278cbe9174bb63d21d",
+            "description": "pro_15dd380b55638cfddc9baeebbafe3b28745da9833a30d5278cbe9174bb63d21d",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://reqres.in/api/collections/products/records",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "collections",
+            "products",
+            "records"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get single record",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"status code of 200\",()=>{\r",
+              " pm.response.to.have.status(200);\r",
+              "})\r",
+              "\r",
+              "let res= pm.response.json();\r",
+              "\r",
+              "pm.test(\"Name is Present\",()=>{\r",
+              "    pm.expect(res.data.data).to.have.property(\"name\");\r",
+              "})\r",
+              "\r",
+              "pm.test(\"price is Present\",()=>{\r",
+              "    pm.expect(res.data.data).to.have.property(\"price\");\r",
+              "})\r",
+              "\r",
+              "pm.test(\"price is should be null\",()=>{\r",
+              "    pm.expect(res.data.price).to.not.be.null;\r",
+              "})\r",
+              "\r",
+              "pm.test(\"price is category\",()=>{\r",
+              "    pm.expect(res.data.data).to.have.property(\"category\");\r",
+              "})\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "pro_15dd380b55638cfddc9baeebbafe3b28745da9833a30d5278cbe9174bb63d21d",
+            "description": "pro_15dd380b55638cfddc9baeebbafe3b28745da9833a30d5278cbe9174bb63d21d",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{URL}}/records/f4b09908-a7d2-4c5b-95bb-7f1681866d95?project_id=12310",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "records",
+            "f4b09908-a7d2-4c5b-95bb-7f1681866d95"
+          ],
+          "query": [
+            {
+              "key": "project_id",
+              "value": "12310"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create new Product",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status of code 201\", ()=>{\r",
+              "    pm.response.to.have.status(201);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Response time should be less than 500ms\",()=>{\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+              "})\r",
+              "\r",
+              "let res = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Response has Data\",()=>{\r",
+              "    pm.expect(res.data).to.not.be.null;\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Name is correct\",()=>{\r",
+              "    pm.expect(res.data.data.name).to.eq(\"Wireless Headphones\");\r",
+              "})\r",
+              "pm.test(\"content-type should br application.json\",()=>{\r",
+              "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json; charset=utf-8\");\r",
+              "\r",
+              "})\r",
+              "//let res = pm.response.json();\r",
+              "// Debug\r",
+              "console.log(\"POST ID:\", res.data.id);\r",
+              "\r",
+              "// Store ID for chaining\r",
+              "pm.environment.set(\"product_id\", res.data.id);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "pro_15dd380b55638cfddc9baeebbafe3b28745da9833a30d5278cbe9174bb63d21d",
+            "description": "pro_15dd380b55638cfddc9baeebbafe3b28745da9833a30d5278cbe9174bb63d21d",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n     \"data\":{\n  \"name\": \"Wireless BLUETOOH\",\n  \"price\": 59.99,\n  \"category\": \"Electronics\",\n  \"in_stock\": true\n     }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URL}}/records?project_id=12310",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "records"
+          ],
+          "query": [
+            {
+              "key": "project_id",
+              "value": "12310"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Changing Data",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "pro_15dd380b55638cfddc9baeebbafe3b28745da9833a30d5278cbe9174bb63d21d",
+            "description": "pro_15dd380b55638cfddc9baeebbafe3b28745da9833a30d5278cbe9174bb63d21d",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URL}}/records/{{product_id}}?project_id=12310",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "records",
+            "{{product_id}}"
+          ],
+          "query": [
+            {
+              "key": "project_id",
+              "value": "12310"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "pro_15dd380b55638cfddc9baeebbafe3b28745da9833a30d5278cbe9174bb63d21d",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"data\": {\r\n    \"name\": \"Wireless BlueTooth\",\r\n    \"price\": 60,\r\n    \"category\": \"Electronics\",\r\n    \"in_stock\": true\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{URL}}/records/{{product_id}}?project_id=12310",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "records",
+            "{{product_id}}"
+          ],
+          "query": [
+            {
+              "key": "project_id",
+              "value": "12310"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "URL",
+      "value": "https://reqres.in/api/collections/products"
+    }
+  ]
+}
